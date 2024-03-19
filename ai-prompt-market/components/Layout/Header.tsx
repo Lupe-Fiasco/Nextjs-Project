@@ -10,7 +10,7 @@ type Props = {
     activeItem: number
 }
 
-const Header = ({ activeItem }: Props) => {
+export default function Header({ activeItem }: Props) {
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -86,4 +86,3 @@ const Header = ({ activeItem }: Props) => {
         </div>
     )
 }
-export default Header 

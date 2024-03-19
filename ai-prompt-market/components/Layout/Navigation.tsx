@@ -27,7 +27,7 @@ const navItems = [
     },
 ];
 
-const Navigation = ({ activeItem }: Props) => {
+export default function Navigation({ activeItem }: Props) {
     return (
         <div className="block md:flex">
             {navItems.map((item, index) => (
@@ -44,5 +44,3 @@ const Navigation = ({ activeItem }: Props) => {
         </div>
     )
 }
-
-export default Navigation
