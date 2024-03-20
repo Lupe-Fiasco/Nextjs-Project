@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '@nextui-org/react'
 import { Avatar } from '@nextui-org/react'
-import Rating from '../Rating'
+import Rating from '../../utils/Rating'
 import { styles } from '@/utils/styles'
 
 type Props = {}

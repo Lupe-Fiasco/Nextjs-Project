@@ -1,8 +1,8 @@
 import React from 'react'
-import { Avatar, Button, Card, Divider } from "@nextui-org/react";
+import { Avatar, Card, Divider } from "@nextui-org/react";
 import Image from 'next/image';
 import { styles } from '@/utils/styles';
-import Rating from '@/components/Rating';
+import Rating from '@/utils/Rating';
 import Link from 'next/link';
 
 
