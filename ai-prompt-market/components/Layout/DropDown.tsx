@@ -59,7 +59,7 @@ export default function DropDown({ user, setOpen, handleProfile, isSellerExist }
                     </Link>
                 </DropdownItem>
                 <DropdownItem className={`${!isSellerExist && "hidden"}`}>
-                    <Link href={"/my-shop"} className="flex w-full items-center">
+                    <Link href={"/personal-shop"} className="flex w-full items-center">
                         <TbSwitchVertical className="text-2xl ml-2 text-black" />
                         <span className={`${styles.label} text-black text-[16px] pl-2`}>
                             Switching to Seller

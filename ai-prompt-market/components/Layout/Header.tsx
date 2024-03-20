@@ -13,7 +13,7 @@ import { UserProfile } from "@clerk/nextjs";
 type Props = {
     activeItem: number
     user: User | null
-    isSellerExist?: boolean | undefined
+    isSellerExist: boolean
 }
 
 export default function Header({ activeItem, user, isSellerExist }: Props) {

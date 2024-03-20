@@ -15,16 +15,18 @@ import axios from 'axios'
 import Loading from '@/utils/Loading'
 
 type Props = {
-  isSellerExist: boolean;
+
 }
 
-const Page = ({ isSellerExist }: Props) => {
+const Page = ({ }: Props) => {
   const [user, setUser] = useState(null);
   const [isloading, setLoading] = useState(false);
+  const [isSellerExist, setIsSellerExist] = useState(false);
   useEffect(() => {
     setLoading(true);
     axios.get('/api/personal').then((res) => {
       setUser(res.data.user);
+      setIsSellerExist(res.data.shop ? true : false);
       setLoading(false);
     }).catch((err) => {
       console.log(err);
