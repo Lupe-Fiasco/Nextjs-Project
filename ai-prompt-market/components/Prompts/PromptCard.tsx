@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { styles } from '@/utils/styles';
 import Rating from '@/utils/Rating';
 import Link from 'next/link';
+import getShopById from '@/actions/shop/getShopById';
 
+type Props = {
+    prompt: any
+}
 
-type Props = {}
-
-export default function PromptCard({ }: Props) {
+export default async function PromptCard({ prompt }: Props) {
+    const shop = await getShopById(prompt.sellerId)
     return (
         <Card
             radius="lg"
@@ -17,7 +20,7 @@ export default function PromptCard({ }: Props) {
             <div className="relative">
                 {/* 商品图片 */}
                 <Image
-                    src='https://pixner.net/aikeu/assets/images/category/fourteen.png'
+                    src={prompt.images[0].url}
                     alt=""
                     className="w-full !max-h-[200px] object-cover"
                     width={300}
@@ -32,7 +35,7 @@ export default function PromptCard({ }: Props) {
                             alt=""
                         />
                         <span className={`${styles.label} pl-2 text-white`}>
-                            Chatgpt
+                            {prompt.category}
                         </span>
                     </div>
                 </div>
@@ -40,21 +43,21 @@ export default function PromptCard({ }: Props) {
             {/* 类别、价格 */}
             <div className="w-full flex justify-between py-2">
                 <h3 className={`${styles.label} text-[18px] text-white`}>
-                    Animal Prompts
+                    {prompt.name}
                 </h3>
-                <p className={`${styles.paragraph}`}>$77.25</p>
+                <p className={`${styles.paragraph}`}>${prompt.price}</p>
             </div>
             <Divider className="bg-[#ffffff18] my-3" />
             {/* 作者信息 */}
             <div className="w-full flex items-center justify-between">
                 <div className="flex items-center">
-                    <Avatar src='https://i.pravatar.cc/150?u=fake@pravatar.com' />
-                    <span className={`${styles.label} pl-3`}>@Lexi</span>
+                    <Avatar src={shop?.avatar} />
+                    <span className={`${styles.label} pl-3`}>@{shop?.name}</span>
                 </div>
                 <Rating rating={4} />
             </div>
             <br />
-            <Link href='/shop/134' className="w-full">
+            <Link href={`shop/${prompt.id}`} className="w-full">
                 <div
                     className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
                 >

@@ -12,7 +12,7 @@ import { UserProfile } from "@clerk/nextjs";
 
 type Props = {
     activeItem: number
-    user: User | null
+    user: User | undefined
     isSellerExist: boolean
 }
 

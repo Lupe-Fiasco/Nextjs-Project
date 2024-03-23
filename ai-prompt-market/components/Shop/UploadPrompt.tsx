@@ -167,7 +167,7 @@ const UploadPrompt = (props: Props) => {
                     price: "",
                     tags: "",
                 });
-                redirect("/shop/personal-shop");
+                redirect("/shop/-shop");
             })
             .catch((error) => {
                 setIsLoading(false);
