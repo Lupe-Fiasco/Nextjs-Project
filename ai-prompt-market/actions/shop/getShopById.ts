@@ -1,5 +1,5 @@
+'use server'
 import prisma from "@/lib/prismaDB";
-
 export default async function getShopById(shopId: string) {
     try {
         const shop = await prisma.shops.findUnique({

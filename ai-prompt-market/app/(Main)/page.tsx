@@ -25,7 +25,7 @@ export default async function Page({ }: Props) {
   const data = await getUser();
   const user = data?.user;
   const isSellerExist = data?.shop ? true : false;
-  const promptData = await getAllPrompts()
+  const promptsData = await getAllPrompts()
 
   return (
     <>
@@ -42,7 +42,7 @@ export default async function Page({ }: Props) {
             </h1>
             <div className="flex flex-wrap">
               {
-                promptData?.map((prompt: any) => (
+                promptsData?.map((prompt: any) => (
                   <PromptCard key={prompt.id} prompt={prompt} />
                 ))
               }
