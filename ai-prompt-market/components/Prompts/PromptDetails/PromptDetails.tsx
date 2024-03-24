@@ -1,6 +1,8 @@
 import React from 'react'
 import getPromptById from '@/actions/prompts/getPromptById'
 import getPromptByCategory from '@/actions/prompts/getPromptByCategory'
+import { stripePublishableKey, stripePaymentIntent } from '@/actions/payment/paymentAction'
+import { loadStripe } from '@stripe/stripe-js'
 import { styles } from '@/utils/styles'
 import PromptDetailsCard from './PromptDetailsCard'
 import PromptInformation from './PromptInformation'
@@ -10,13 +12,24 @@ type Props = {
     params: any
 }
 export default async function PromptDetails({ params }: Props) {
+    let stripePromise;
+    let clientSecret;
     const promptData = await getPromptById(params.prompt_id)
     const relatedPromptData = await getPromptByCategory(promptData?.category)
     const relatedPrompts = relatedPromptData?.filter((item: any) => item.id !== promptData?.id)
+    const publishAbleKey = stripePublishableKey()
+    if (publishAbleKey) {
+        const amount = Math.round(promptData?.price * 100)
+        const paymentIntent = await stripePaymentIntent(amount)
+        clientSecret = paymentIntent?.client_secret
+        stripePromise = loadStripe(publishAbleKey)
+    }
     return (
         <div>
             <PromptDetailsCard
                 promptData={promptData}
+                clientSecret={clientSecret}
+                stripePromise={stripePromise}
             />
             <br />
             <br />

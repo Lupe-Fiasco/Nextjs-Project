@@ -5,13 +5,18 @@ import { Button, Chip } from "@nextui-org/react";
 import Image from "next/image";
 import React, { useState } from "react";
 import Marquee from "react-fast-marquee";
+import { IoCloseOutline } from "react-icons/io5";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
-
-export default function PromptDetailsCard({
-  promptData,
-}: {
+type Props = {
   promptData: any;
-}) {
+  clientSecret: string;
+  stripePromise: any;
+}
+
+export default function PromptDetailsCard({ promptData, clientSecret, stripePromise, }: Props) {
+  const [open, setOpen] = useState(false);
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
   const tags = promptData?.tags;;
   const tagsList = tags.split(",").map((tag: string) => tag.trim());
@@ -108,6 +113,7 @@ export default function PromptDetailsCard({
             </div>
             <br />
             <Button
+              onClick={() => setOpen(!open)}
               radius="full"
               className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
             >
@@ -116,6 +122,30 @@ export default function PromptDetailsCard({
           </div>
         </div>
       </div>
+      {open && (
+        <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
+          <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
+            <div className="w-full flex justify-end">
+              <IoCloseOutline
+                size={40}
+                className="text-black cursor-pointer"
+                onClick={() => setOpen(!open)}
+              />
+            </div>
+            <div className="w-full">
+              {stripePromise && clientSecret && (
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                  <CheckoutForm
+                    setOpen={setOpen}
+                    open={open}
+                    promptData={promptData}
+                  />
+                </Elements>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
