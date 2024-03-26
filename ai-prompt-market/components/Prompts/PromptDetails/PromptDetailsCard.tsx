@@ -15,7 +15,7 @@ type Props = {
   stripePromise: any;
 }
 
-export default function PromptDetailsCard({ promptData, clientSecret, stripePromise, }: Props) {
+export default function PromptDetailsCard({ promptData, clientSecret, stripePromise }: Props) {
   const [open, setOpen] = useState(false);
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
   const tags = promptData?.tags;;

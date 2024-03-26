@@ -24,7 +24,7 @@ export default function DropDown({ user, setOpen, handleProfile, isSellerExist }
         router.push('/sign-in')
     }
     return (
-        <Dropdown placeholder="bottom-start" className="bg-white">
+        <Dropdown placement="bottom-start" className="bg-white">
             <DropdownTrigger>
                 <Avatar
                     src={user?.imageUrl}

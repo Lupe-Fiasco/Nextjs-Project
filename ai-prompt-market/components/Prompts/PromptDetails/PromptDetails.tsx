@@ -23,6 +23,8 @@ export default async function PromptDetails({ params }: Props) {
         const paymentIntent = await stripePaymentIntent(amount)
         clientSecret = paymentIntent?.client_secret
         stripePromise = loadStripe(publishAbleKey)
+        console.log(stripePromise);
+        console.log(clientSecret);
     }
     return (
         <div>
