@@ -1,22 +1,63 @@
 import prisma from "@/lib/prismaDB";
 import { NextRequest, NextResponse } from "next/server";
-import { User, currentUser } from '@clerk/nextjs/server'
+import { parse } from "url";
 
 export async function GET(req: NextRequest) {
     try {
-        const user: User | null = await currentUser();
-        const sellerId = user?.id;
-        const prompts = await prisma.prompts.findMany({
+        const { query } = parse(req.url, true);
+        const pageNumber = query.page ? parseInt(query.page.toString(), 10) : 1;
+
+        const pageSize = 8;
+
+        const prompts: any = await prisma.prompts.findMany({
+            include: {
+                orders: true,
+                images: true,
+                reviews: true,
+                promptUrl: true,
+            },
             where: {
-                sellerId: sellerId
+                status: "Live",
+            },
+            take: pageSize,
+            skip: (pageNumber - 1) * pageSize,
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+
+        const totalPrompts: any = await prisma.prompts.findMany({
+            where: {
+                status: "Live",
             },
             include: {
-                orders: true
+                images: true,
+            },
+        });
+
+        if (prompts) {
+            for (const prompt of prompts) {
+                const shop = await prisma.shops.findUnique({
+                    where: {
+                        userId: prompt.sellerId,
+                    },
+                });
+                prompt.shop = shop;
             }
-        })
-        return NextResponse.json(prompts);
+
+            for (const prompt of totalPrompts) {
+                const shop = await prisma.shops.findUnique({
+                    where: {
+                        userId: prompt.sellerId,
+                    },
+                });
+                prompt.shop = shop;
+            }
+        }
+
+        return NextResponse.json({ prompts, totalPrompts });
     } catch (error) {
-        console.log('Failed to fetch prompts', error);
-        return new NextResponse('Internal Server Error', { status: 500 });
+        console.log("get prompts error", error);
+        return new NextResponse("Internal Error", { status: 500 });
     }
 }

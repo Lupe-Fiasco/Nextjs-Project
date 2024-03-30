@@ -1,8 +1,9 @@
 import React from 'react'
 import ShopSidebar from '@/components/Shop/ShopSideBar'
 import AllPrompts from '@/components/Shop/AllPrompts'
+import
 
-type Props = {}
+type Props = { }
 
 export default function page({ }: Props) {
     return (

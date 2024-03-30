@@ -2,7 +2,7 @@ import { User, currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismaDB";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     try {
         const user: User | null = await currentUser();
 
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
             }
         })
 
-        return NextResponse.json({ user, shop });
+        return { user, shop };
     } catch (error) {
         console.log("load user error", error);
         return new NextResponse("Internal Error", { status: 500 });

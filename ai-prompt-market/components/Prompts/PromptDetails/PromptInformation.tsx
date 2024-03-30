@@ -30,6 +30,9 @@ export default function PromptInformation({ promptData }: Props) {
     }
     fetchData();
   }, [promptData])
+
+  // console.log(promptData.reviews);
+
   // const shop = await getShopById(promptData?.sellerId)
   return (
     <div>

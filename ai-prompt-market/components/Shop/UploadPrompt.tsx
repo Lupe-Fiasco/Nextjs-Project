@@ -300,7 +300,7 @@ const UploadPrompt = (props: Props) => {
                         accept="image/*"
                         multiple
                         id="file"
-                        className="hidden" //只让label显示
+                        className="hidden"
                         onChange={handleImageFileChange}
                     />
                     <label

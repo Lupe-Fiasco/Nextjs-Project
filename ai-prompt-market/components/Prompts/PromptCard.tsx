@@ -1,17 +1,14 @@
-import React from 'react'
 import { Avatar, Card, Divider } from "@nextui-org/react";
 import Image from 'next/image';
 import { styles } from '@/utils/styles';
 import Rating from '@/utils/Rating';
 import Link from 'next/link';
-import getShopById from '@/actions/shop/getShopById';
 
 type Props = {
     prompt: any
 }
 
-export default async function PromptCard({ prompt }: Props) {
-    const shop = await getShopById(prompt.sellerId)
+export default function PromptCard({ prompt }: Props) {
     return (
         <Card
             radius="lg"
@@ -28,12 +25,28 @@ export default async function PromptCard({ prompt }: Props) {
                 />
                 <div className="absolute bottom-2 left-2">
                     <div className="w-max bg-black hover:bg-[#16252] duration-300 transition-opacity hover:text-black text-white p-[10px] items-center flex rounded-xl">
-                        <Image
-                            src="https://pixner.net/aikeu/assets/images/category/chat.png"
-                            width={25}
-                            height={25}
-                            alt=""
-                        />
+                        {prompt?.category === "Chatgpt" ? (
+                            <Image
+                                src="https://pixner.net/aikeu/assets/images/category/chat.png"
+                                width={25}
+                                height={25}
+                                alt=""
+                            />
+                        ) : (
+                            <>
+                                {prompt?.category === "Dalle" ? (
+                                    "⛵"
+                                ) : (
+                                    <>
+                                        {prompt?.category === "Midjourney" ? (
+                                            "🎨"
+                                        ) : (
+                                            <>{prompt?.category === "Bard" ? "🐥" : null}</>
+                                        )}
+                                    </>
+                                )}
+                            </>
+                        )}
                         <span className={`${styles.label} pl-2 text-white`}>
                             {prompt.category}
                         </span>
@@ -51,10 +64,10 @@ export default async function PromptCard({ prompt }: Props) {
             {/* 作者信息 */}
             <div className="w-full flex items-center justify-between">
                 <div className="flex items-center">
-                    <Avatar src={shop?.avatar} />
-                    <span className={`${styles.label} pl-3`}>@{shop?.name}</span>
+                    <Avatar src={prompt?.shop?.avatar} />
+                    <span className={`${styles.label} pl-3`}>@{prompt?.shop?.name}</span>
                 </div>
-                <Rating rating={4} />
+                <Rating rating={prompt?.rating} />
             </div>
             <br />
             <Link href={`prompt/${prompt.id}`} className="w-full">

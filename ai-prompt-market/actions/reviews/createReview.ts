@@ -46,7 +46,7 @@ export default async function createReview({
                     avg += rev.rating;
                 });
 
-            // update the prompt with new rating
+
             await prisma.prompts.update({
                 where: {
                     id: promptId,
