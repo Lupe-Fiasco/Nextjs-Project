@@ -1,4 +1,6 @@
+"use server";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 export const stripePublishableKey = () => {
     const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
     return publishableKey;

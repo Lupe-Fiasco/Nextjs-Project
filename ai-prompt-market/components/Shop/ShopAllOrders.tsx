@@ -4,48 +4,48 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { AiOutlineMail } from "react-icons/ai";
 import { format } from "timeago.js";
 
-const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,ordersData:any}) => {
+export default function ShopAllOrders({ isDashboard, ordersData }: { isDashboard: boolean, ordersData: any }) {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Name", flex: isDashboard ? 0.6 : 0.5 },
     ...(isDashboard
       ? []
       : [
-          { field: "email", headerName: "Email", flex: 1 },
-          { field: "title", headerName: "Prompt Title", flex: 1 },
-        ]),
+        { field: "email", headerName: "Email", flex: 1 },
+        { field: "title", headerName: "Prompt Title", flex: 1 },
+      ]),
     { field: "price", headerName: "Price", flex: 0.5 },
     ...(isDashboard
       ? [{ field: "created_at", headerName: "Created At", flex: 0.5 }]
       : [
-          {
-            field: " ",
-            headerName: "Email",
-            flex: 0.2,
-            renderCell: (params: any) => {
-              return (
-                <a href={`mailto:${params.row.email}`}>
-                  <AiOutlineMail
-                    className="dark:text-white text-black"
-                    size={20}
-                  />
-                </a>
-              );
-            },
+        {
+          field: " ",
+          headerName: "Email",
+          flex: 0.2,
+          renderCell: (params: any) => {
+            return (
+              <a href={`mailto:${params.row.email}`}>
+                <AiOutlineMail
+                  className="dark:text-white text-black"
+                  size={20}
+                />
+              </a>
+            );
           },
-        ]),
+        },
+      ]),
   ];
 
   const rows: any = [];
 
-  ordersData && ordersData.forEach((order:any) => {
+  ordersData && ordersData.forEach((order: any) => {
     rows.push({
-        id: order.id,
-        name: order?.user?.firstName + " " + order?.user?.lastName,
-        email: order?.user?.emailAddresses[0]?.emailAddress,
-        title: order?.prompt?.name,
-        price: "US $" + order?.prompt.price,
-        created_at: format(order?.createdAt),
+      id: order.id,
+      name: order?.user?.firstName + " " + order?.user?.lastName,
+      email: order?.user?.emailAddresses[0]?.emailAddress,
+      title: order?.prompt?.name,
+      price: "US $" + order?.prompt.price,
+      created_at: format(order?.createdAt),
     })
   })
 
@@ -110,4 +110,3 @@ const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,orders
   );
 };
 
-export default ShopAllOrders;

@@ -51,7 +51,7 @@ const sideBarItems = [
     },
 ];
 
-const ShopSidebar = ({ active }: Props) => {
+export default function ShopSidebar({ active }: Props) {
     return (
         <div>
             {sideBarItems.map((item, index) => (
@@ -76,4 +76,4 @@ const ShopSidebar = ({ active }: Props) => {
     );
 };
 
-export default ShopSidebar;
+

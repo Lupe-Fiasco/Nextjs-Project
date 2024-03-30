@@ -1,31 +1,43 @@
-import React from 'react'
-import getPromptById from '@/actions/prompts/getPromptById'
-import getPromptByCategory from '@/actions/prompts/getPromptByCategory'
-import { stripePublishableKey, stripePaymentIntent } from '@/actions/payment/paymentAction'
-import { loadStripe } from '@stripe/stripe-js'
-import { styles } from '@/utils/styles'
-import PromptDetailsCard from './PromptDetailsCard'
-import PromptInformation from './PromptInformation'
-import SellersBanner from '@/components/Shop/SellersBanner'
-import PromptCard from '../PromptCard'
-type Props = {
-    params: any
-}
-export default async function PromptDetails({ params }: Props) {
-    let stripePromise;
-    let clientSecret;
-    const promptData = await getPromptById(params.prompt_id)
-    const relatedPromptData = await getPromptByCategory(promptData?.category)
-    const relatedPrompts = relatedPromptData?.filter((item: any) => item.id !== promptData?.id)
-    const publishAbleKey = stripePublishableKey()
-    if (publishAbleKey) {
-        const amount = Math.round(promptData?.price * 100)
-        const paymentIntent = await stripePaymentIntent(amount)
-        clientSecret = paymentIntent?.client_secret
-        stripePromise = loadStripe(publishAbleKey)
-        console.log(stripePromise);
-        console.log(clientSecret);
-    }
+import SellersBanner from "@/components/Shop/SellersBanner";
+import { styles } from "@/utils/styles";
+import PromptDetailsCard from "./PromptDetailsCard";
+import PromptInformation from "./PromptInformation";
+import PromptCard from "../PromptCard";
+import { useEffect, useState } from "react";
+import { propmt } from "@/@types/promptTypes";
+import PromptCardLoader from "@/utils/PromptCardLoader";
+
+const PromptDetails = ({
+    promptData,
+    stripePromise,
+    clientSecret,
+}: {
+    promptData: propmt | undefined;
+    stripePromise: any;
+    clientSecret: string;
+}) => {
+    const [prompts, setPrompts] = useState<propmt[]>();
+    const [loading, setLoading] = useState(true);
+
+    const fetchPromptData = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(
+                `/api/get-related-prompts?promptCategory=${promptData?.category}`
+            );
+            const data = await response.json();
+            setPrompts(data);
+        } catch (error) {
+            console.error("Failed to fetch prompts:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPromptData();
+    }, []);
+
     return (
         <div>
             <PromptDetailsCard
@@ -39,11 +51,8 @@ export default async function PromptDetails({ params }: Props) {
             <br />
             <h1 className={`${styles.heading} px-2 pb-2`}>Related Prompts</h1>
             <div className="flex flex-wrap">
-                {relatedPrompts?.map((item: any) => (
-                    <PromptCard prompt={item} key={item.id} />
-                ))}
-                {/* {loading ? (
-                    [...new Array(4)].map((i) => (
+                {loading ? (
+                    [...new Array(4)].map(() => (
                         <>
                             <PromptCardLoader />
                         </>
@@ -55,10 +64,9 @@ export default async function PromptDetails({ params }: Props) {
                                 <PromptCard prompt={item} key={item.id} />
                             ))}
                     </>
-                )} */}
-
+                )}
             </div>
-            {relatedPrompts?.length === 0 && (
+            {prompts?.length === 0 && (
                 <p className={`${styles.label} text-center block my-5`}>
                     No prompt found with this category!
                 </p>
@@ -68,5 +76,7 @@ export default async function PromptDetails({ params }: Props) {
             <SellersBanner />
             <br />
         </div>
-    )
-}
+    );
+};
+
+export default PromptDetails;

@@ -1,9 +1,7 @@
 'use client'
-import React, { useEffect, useState } from "react";
 import { styles } from "@/utils/styles";
 import { Avatar, Divider, Tab, Tabs } from "@nextui-org/react";
 import ReviewCard from "./ReviewCard";
-import getShopById from "@/actions/shop/getShopById";
 type Props = {
   promptData: any;
 };
@@ -20,20 +18,8 @@ let tabs = [
 ];
 
 export default function PromptInformation({ promptData }: Props) {
-  const [shop, setShop] = useState<any>();
-  useEffect(() => {
-    async function fetchData() {
-      if (promptData) {
-        const shopData = await getShopById(promptData?.sellerId);
-        setShop(shopData);
-      }
-    }
-    fetchData();
-  }, [promptData])
+  console.log(promptData.reviews);
 
-  // console.log(promptData.reviews);
-
-  // const shop = await getShopById(promptData?.sellerId)
   return (
     <div>
       <div className="flex w-full flex-col bg-slate-900 p-3 rounded-md">
@@ -52,20 +38,20 @@ export default function PromptInformation({ promptData }: Props) {
                 {item.title === "Author" && (
                   <>
                     <div className="flex w-full my-2">
-                      <Avatar size="lg" src={shop?.avatar} />
+                      <Avatar size="lg" src={promptData?.shop?.avatar} />
                       <div>
                         <span
                           className={`${styles.label} pl-3 !text-xl text-white`}
                         >
-                          @{shop?.name}
+                          @{promptData?.shop?.name}
                         </span>
                         <br />
                         <span className={`${styles.label} pl-3`}>
-                          Prompts: {shop?.allProducts}
+                          Prompts: {promptData?.shop?.allProducts}
                         </span>
                         <br />
                         <span className={`${styles.label} pl-3`}>
-                          Reviews: {shop?.ratings} / 5
+                          Reviews: {promptData?.shop?.ratings} / 5
                         </span>
                       </div>
                     </div>

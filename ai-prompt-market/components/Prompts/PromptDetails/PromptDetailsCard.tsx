@@ -22,6 +22,11 @@ export default function PromptDetailsCard({ promptData, clientSecret, stripeProm
   const tagsList = tags.split(",").map((tag: string) => tag.trim());
   const percentageDifference = ((promptData?.estimatedPrice - promptData?.price) / promptData?.estimatedPrice) * 100;
   const promptDiscount = percentageDifference?.toFixed(0);
+  // console.log(stripePromise);
+  // console.log(clientSecret);
+
+
+
 
   return (
     <div className="bg-[#1211023] p-3 w-full min-h-[50vh] shadow rounded-xl mt-8">
