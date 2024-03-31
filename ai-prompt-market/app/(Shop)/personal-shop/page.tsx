@@ -1,16 +1,26 @@
-import React from 'react'
-import ShopSidebar from '@/components/Shop/ShopSideBar';
-type Props = {}
+import ShopSidebar from "@/components/Shop/ShopSideBar";
+import DashBoard from "./_page";
+import getUser from "@/actions/user/getUser";
+import { getShopOrders } from "@/actions/orders/getShopOrders";
+import { getAllPromptsByShop } from "@/actions/shop/getAllPromptsByShop";
 
-export default function page({ }: Props) {
-    return (
-        <div className='flex w-full'>
-            <div className='flex h-screen sticky top-0 left-0 md:w-[17%] 2xl:w-[15%] p-2 bg-[#111c42]'>
-                <ShopSidebar active={0} />
-            </div>
-            <div className='md:w-[83%] 2xl:w-[85%]'>
+type Props = {};
 
-            </div>
-        </div>
-    )
-}
+const Page = async (props: Props) => {
+  const sellerId: any = await getUser();
+  const ordersData = await getShopOrders({ sellerId: sellerId?.user.id });
+  const promptsData = await getAllPromptsByShop();
+
+  return (
+    <div className="flex w-full">
+      <div className="h-screen flex p-2 bg-[#111C42] md:w-[20%] 2xl:w-[17%]">
+        <ShopSidebar active={0} />
+      </div>
+      <div className="md:w-[80%] 2xl:w-[83%]">
+        <DashBoard ordersData={ordersData} promptsData={promptsData} />
+      </div>
+    </div>
+  );
+};
+
+export default Page;

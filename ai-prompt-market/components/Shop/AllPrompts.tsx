@@ -1,8 +1,6 @@
 "use client";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 type PromptsDataTypes = {
     id: string;
@@ -16,18 +14,11 @@ type PromptsDataTypes = {
 
 
 type Props = {
-
+    promptsData: any;
+    isDashboard?: boolean;
 }
 
-export default function AllPrompts({ }: Props) {
-    const [promptsData, setPromptsData] = useState([])
-    useEffect(() => {
-        axios.get('/api/get-prompts').then(res => {
-            setPromptsData(res.data)
-        }).catch(err => {
-            console.log('Can\'t get promptsData', err)
-        })
-    }, [])
+export default function AllPrompts({ promptsData, isDashboard }: Props) {
     const columns = [
         { field: "id", headerName: "ID", flex: 0.5 },
         { field: "name", headerName: "Prompts Title", flex: 0.8 },
@@ -58,7 +49,7 @@ export default function AllPrompts({ }: Props) {
             <Box m="20px">
                 <Box
                     m="40px 0 0 0"
-                    height={"90vh"}
+                    height={isDashboard ? "35vh" : "90vh"}
                     sx={{
                         "& .MuiDataGrid-root": {
                             border: "none",
