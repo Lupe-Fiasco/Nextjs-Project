@@ -4,8 +4,6 @@ import { User, currentUser } from "@clerk/nextjs/server";
 
 export const getSellerInfo = async () => {
   try {
-
-
     const user: User | null = await currentUser();
 
     if (!user) {
@@ -15,6 +13,9 @@ export const getSellerInfo = async () => {
       where: {
         userId: user.id,
       },
+      include: {
+        bank: true,
+      }
     });
 
     const orders = await prisma.orders.findMany({

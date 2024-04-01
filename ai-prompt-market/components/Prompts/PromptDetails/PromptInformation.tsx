@@ -18,8 +18,6 @@ let tabs = [
 ];
 
 export default function PromptInformation({ promptData }: Props) {
-  console.log(promptData.reviews);
-
   return (
     <div>
       <div className="flex w-full flex-col bg-slate-900 p-3 rounded-md">

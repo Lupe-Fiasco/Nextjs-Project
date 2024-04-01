@@ -23,7 +23,7 @@ const PromptDetails = ({
         setLoading(true);
         try {
             const response = await fetch(
-                `/api/get-related-prompts?promptCategory=${promptData?.category}`
+                `/api/get-related-prompts?promptCategory=${promptData?.category}&promptId=${promptData?.id}`
             );
             const data = await response.json();
             setPrompts(data);

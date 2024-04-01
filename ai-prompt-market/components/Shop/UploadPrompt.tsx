@@ -259,6 +259,7 @@ const UploadPrompt = (props: Props) => {
                 <br />
                 <div className="md:flex md:w-full">
                     <Select
+                        required
                         label="Choose one category"
                         variant="bordered"
                         placeholder="Select one category"

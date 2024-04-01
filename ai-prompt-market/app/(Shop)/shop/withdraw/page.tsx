@@ -8,8 +8,6 @@ const Page = async () => {
   const invoices = await sellerInvoices({ sellerId: data?.shop?.id! });
   console.log(data?.shop);
 
-
-
   return (
     <div className="flex w-full">
       <div className="h-screen flex p-2 bg-[#111c42] md:w-[20%] 2xl:w-[17%]">
