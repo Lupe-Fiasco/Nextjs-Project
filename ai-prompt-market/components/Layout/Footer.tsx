@@ -44,7 +44,7 @@ export default function Footer({ }: Props) {
                 </div>
             </div>
             <p className={`${styles.paragraph} text-center`}>
-                Copyright © 2023 Becodemy . All Rights Reserved
+                Copyright © 2023 YoungMoney . All Rights Reserved
             </p>
             <br />
             <br />

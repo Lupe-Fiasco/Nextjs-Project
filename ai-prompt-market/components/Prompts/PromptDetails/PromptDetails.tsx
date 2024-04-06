@@ -52,7 +52,7 @@ const PromptDetails = ({
             <h1 className={`${styles.heading} px-2 pb-2`}>Related Prompts</h1>
             <div className="flex flex-wrap">
                 {loading ? (
-                    [...new Array(4)].map(() => (
+                    [...new Array(3)].map(() => (
                         <>
                             <PromptCardLoader />
                         </>

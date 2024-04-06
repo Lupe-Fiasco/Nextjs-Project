@@ -65,7 +65,7 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
             </h1>
             <div className="w-full flex flex-wrap mt-5">
               {loading ? (
-                [...new Array(8)].map(() => (
+                [...new Array(9)].map(() => (
                   <>
                     <PromptCardLoader />
                   </>

@@ -42,7 +42,7 @@ export default function BestSellers() {
             </h1>
             <div className="flex flex-wrap">
                 {loading
-                    ? [...new Array(8)].map((i) => (
+                    ? [...new Array(3)].map((i) => (
                         <div key={i}>
                             <SellerCard loading={loading} />
                         </div>

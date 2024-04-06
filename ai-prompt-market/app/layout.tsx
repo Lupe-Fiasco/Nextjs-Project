@@ -12,6 +12,9 @@ const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat
 export const metadata: Metadata = {
   title: 'Young Money',
   description: 'AI Propmt Market',
+  icons: {
+    icon: '/assets/ts.jpg',
+  }
 }
 
 export default function RootLayout({

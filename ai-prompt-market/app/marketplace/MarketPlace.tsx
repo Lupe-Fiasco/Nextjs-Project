@@ -59,7 +59,7 @@ export default function MarketPlace({
         return null;
     }
 
-    const paginationsPages = totalPrompts && Math.ceil(totalPrompts.length / 8);
+    const paginationsPages = totalPrompts && Math.ceil(totalPrompts.length / 9);
 
     return (
         <>
@@ -78,7 +78,7 @@ export default function MarketPlace({
                         </div>
                         <div className="w-full flex flex-wrap mt-5">
                             {loading ? (
-                                [...new Array(8)].map((i) => (
+                                [...new Array(9)].map((i) => (
                                     <>
                                         <PromptCardLoader />
                                     </>

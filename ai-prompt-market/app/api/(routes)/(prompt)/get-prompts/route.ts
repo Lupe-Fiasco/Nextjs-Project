@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
         const { query } = parse(req.url, true);
         const pageNumber = query.page ? parseInt(query.page.toString(), 10) : 1;
 
-        const pageSize = 8;
+        const pageSize = 9;
 
         const prompts: any = await prisma.prompts.findMany({
             include: {
