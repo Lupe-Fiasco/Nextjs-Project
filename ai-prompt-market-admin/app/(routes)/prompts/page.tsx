@@ -4,16 +4,16 @@ import Heading from "@/utils/Heading";
 import AllPrompts from "@/components/Admin/AllPrompts";
 import { GetPrompts } from "@/actions/prompt/getPrompts";
 
-interface Props {}
+interface Props { }
 
 const Page: FC<Props> = async (props) => {
   const data = await GetPrompts();
-   
+
   return (
     <div>
       <Heading
-        title="Becodemy - Admin"
-        description="Becodemy is a platform for students to learn and get help from teachers"
+        title="YoungMoney - Admin"
+        description="YoungMoney is a platform for students to learn and get help from teachers"
         keywords="Programming,MERN,Redux,Machine Learning"
       />
       <div className="flex min-h-screen">

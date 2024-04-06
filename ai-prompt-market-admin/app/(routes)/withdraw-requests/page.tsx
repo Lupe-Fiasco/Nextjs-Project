@@ -4,15 +4,15 @@ import Heading from "@/utils/Heading";
 import AllWithdrawRequests from "@/components/Admin/AllWithdrawRequests";
 import { getAllWithdraws } from "@/actions/withdraws/getAllWithdraws";
 
-interface Props {}
+interface Props { }
 
 const Page: FC<Props> = async (props) => {
   const withdraws = await getAllWithdraws();
   return (
     <div>
       <Heading
-        title="Becodemy - Admin"
-        description="Becodemy is a platform for students to learn and get help from teachers"
+        title="YoungMoney - Admin"
+        description="YoungMoney is a platform for students to learn and get help from teachers"
         keywords="Programming,MERN,Redux,Machine Learning"
       />
       <div className="flex min-h-screen">
@@ -20,7 +20,7 @@ const Page: FC<Props> = async (props) => {
           <Sidebar activeItem="Withdraw requests" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
-            <AllWithdrawRequests withdraws={withdraws} />
+          <AllWithdrawRequests withdraws={withdraws} />
         </div>
       </div>
     </div>

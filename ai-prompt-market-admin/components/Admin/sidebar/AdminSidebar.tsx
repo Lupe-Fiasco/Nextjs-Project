@@ -100,7 +100,6 @@ const Sidebar = ({ selected, setSelected }: Props) => {
         }}
       >
         <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <ArrowForwardIosIcon /> : undefined}
@@ -117,7 +116,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
               >
                 <Link href="/" className="block">
                   <h3 className="text-[25px] font-Poppins uppercase text-white">
-                    Becodemy
+                    YoungMoney
                   </h3>
                 </Link>
                 <IconButton
@@ -138,7 +137,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   width={100}
                   height={100}
                   src={
-                    "https://res.cloudinary.com/dkg6jv4l0/image/upload/v1688418919/avatars/sbtiws3u7astteqrvalt.jpg"
+                    "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18yZHZ5MDBac0Z2UkQzTTFzM1M4NmExTmdCTmUifQ"
                   }
                   style={{
                     cursor: "pointer",
@@ -153,7 +152,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   className="!text-[20px]  text-[#ffffffc1]"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Shahriar Sajeeb
+                  Fezco
                 </Typography>
                 <Typography
                   variant="h6"

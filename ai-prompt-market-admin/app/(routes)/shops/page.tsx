@@ -4,15 +4,15 @@ import Heading from "@/utils/Heading";
 import AllShops from "@/components/Admin/AllShops";
 import { getAllShops } from "@/actions/shops/getAllShops";
 
-interface Props {}
+interface Props { }
 
 const Page: FC<Props> = async (props) => {
-const shopsData = await getAllShops();
+  const shopsData = await getAllShops();
   return (
     <div>
       <Heading
-        title="Becodemy - Admin"
-        description="Becodemy is a platform for students to learn and get help from teachers"
+        title="YoungMoney - Admin"
+        description="YoungMoney is a platform for students to learn and get help from teachers"
         keywords="Programming,MERN,Redux,Machine Learning"
       />
       <div className="flex min-h-screen">

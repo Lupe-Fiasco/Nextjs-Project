@@ -8,15 +8,15 @@ import { getAllInvoices } from "@/actions/invoices/getAllInvoices";
 const Page = async () => {
   const isAdmin = await useIsAdmin();
   const data = await getAllInvoices();
-  
+
   return (
     <>
       {isAdmin ? (
         <>
           <div>
             <Heading
-              title="Becodemy - Admin"
-              description="Becodemy is a platform for students to learn and get help from teachers"
+              title="YoungMoney - Admin"
+              description="YoungMoney is a platform for students to learn and get help from teachers"
               keywords="Programming,MERN,Redux,Machine Learning"
             />
             <div className="flex min-h-screen">
