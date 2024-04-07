@@ -4,7 +4,7 @@ export type withdawMethod = {
   bank_address: string;
   sellerId: string;
   account_holder_name: string;
-  account_number: number;
-  routing_number: number;
+  account_number: string;
+  routing_number: string;
   swift_code: string;
 };
