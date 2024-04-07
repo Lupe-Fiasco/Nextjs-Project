@@ -8,7 +8,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 type Props = {}
 
-export default function page({ }: Props) {
+export default function Page({ }: Props) {
     const { user } = useUser()
     const [isloading, setLoading] = useState(false);
     const router = useRouter()
