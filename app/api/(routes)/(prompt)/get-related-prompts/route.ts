@@ -24,9 +24,6 @@ export async function GET(req: NextRequest) {
       },
       where: {
         category: promptCategory,
-        id: {
-          not: query.promptId,
-        }
       },
     });
 
