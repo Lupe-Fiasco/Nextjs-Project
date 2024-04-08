@@ -13,7 +13,7 @@ type Props = {
     user: User | null
     setOpen: (open: boolean) => void
     handleProfile: () => void
-    isSellerExist: boolean
+    isSellerExist: boolean | undefined
 }
 
 export default function DropDown({ user, setOpen, handleProfile, isSellerExist }: Props) {
